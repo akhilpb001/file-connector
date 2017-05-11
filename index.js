@@ -1,5 +1,5 @@
 var fs = require('fs');
-var request = require('ajax-request');
+var request = require('request');
 var Promise = require('promise');
 
 var _hdfsWebAddr = "http://localhost:9870";

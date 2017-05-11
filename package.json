@@ -1,13 +1,13 @@
 {
   "name": "file-connector",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Bunch of apis to get list of directories and files from hadoop hdfs or local file system.",
   "main": "index.js",
   "engines": {
     "node": ">=4.2.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test/test.js"
   },
   "repository": {
     "type": "git",
@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/akhilpb001/file-connector#readme",
   "dependencies": {
-    "ajax-request": "^1.2.1",
-    "promise": "7.1.1"
+    "promise": "7.1.1",
+    "request": "2.81.0"
   }
 }
