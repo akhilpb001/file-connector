@@ -36,7 +36,7 @@ var connecter = {
             && list.DirectoryListing.partialListing.FileStatuses.FileStatus) {
               var dirs = list.DirectoryListing.partialListing.FileStatuses.FileStatus;
               [].forEach.call(dirs, function(stat) {
-                if (stat.type === "DIRECTORY" && (stat.pathSuffix !== ".git" || stat.pathSuffix !== "apps-base")) {
+                if (stat.type === "DIRECTORY" && stat.pathSuffix !== ".git" && stat.pathSuffix !== "apps-base") {
                   apps.push(stat);
                 }
               });

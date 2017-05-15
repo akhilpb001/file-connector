@@ -1,6 +1,6 @@
 {
   "name": "file-connector",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Bunch of apis to get list of directories and files from hadoop hdfs or local file system.",
   "main": "index.js",
   "engines": {
