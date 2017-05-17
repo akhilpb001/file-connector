@@ -2,27 +2,21 @@ var fs = require('fs');
 var request = require('request');
 var Promise = require('promise');
 
-var _hdfsWebAddr = "http://localhost:9870";
-var _hdfsWebNamespace = "webhdfs/v1";
-var _hdfsBaseDir = "hwx-assemblies";
-
-var _localBaseDir = "hwx-assemblies";
-var _localUserName = "user";
+var _hdfsWebAddress = "http://localhost:9870";
+var _hdfsWebNamespace = "webhdfs/v1/hwx-assemblies";
+var _localFileSystemBaseDir = "/home/user/hwx-assemblies";
 
 var connecter = {
   setConfigs: function(configs) {
     if (configs) {
-      configs.hdfsWebAddr? (_hdfsWebAddr = configs.hdfsWebAddr) : "";
+      configs.hdfsWebAddress? (_hdfsWebAddress = configs.hdfsWebAddress) : "";
       configs.hdfsWebNamespace? (_hdfsWebNamespace = configs.hdfsWebNamespace) : "";
-      configs.hdfsBaseDir? (_hdfsBaseDir = configs.hdfsBaseDir) : "";
-
-      configs.localBaseDir? (_localBaseDir = configs.localBaseDir) : "";
-      configs.localUserName? (_localUserName = configs.localUserName) : "";
+      configs.localFileSystemBaseDir? (_localFileSystemBaseDir = configs.localFileSystemBaseDir) : "";
     }
   },
   hdfs: {
     getListOfApps: function() {
-      var url = _hdfsWebAddr + "/" + _hdfsWebNamespace + "/" + _hdfsBaseDir + "?op=LISTSTATUS_BATCH";
+      var url = _hdfsWebAddress + "/" + _hdfsWebNamespace + "?op=LISTSTATUS_BATCH";
       return new Promise(function(resolve, reject) {
         request(url, function(errr, resp, body) {
           if (errr) {
@@ -49,7 +43,7 @@ var connecter = {
       if (!app) {
         throw new Error("App name is not specified and is mandatory");
       }
-      var url = _hdfsWebAddr + "/" + _hdfsWebNamespace + "/" + _hdfsBaseDir + "/" + app + "?op=LISTSTATUS_BATCH";
+      var url = _hdfsWebAddress + "/" + _hdfsWebNamespace + "/" + app + "?op=LISTSTATUS_BATCH";
       return new Promise(function(resolve, reject) {
         request(url, function(errr, resp, body) {
           if (errr) {
@@ -76,7 +70,7 @@ var connecter = {
       if (!app || !version) {
         throw new Error("App name and version are not specified and both are mandatory");
       }
-      var url = _hdfsWebAddr + "/" + _hdfsWebNamespace + "/" +_hdfsBaseDir + "/" + app + "/" + version + "/Yarnfile?op=OPEN";
+      var url = _hdfsWebAddress + "/" + _hdfsWebNamespace + "/" + app + "/" + version + "/Yarnfile?op=OPEN";
       return new Promise(function(resolve, reject) {
         request(url, function(errr, resp, body) {
           if (errr) {
@@ -91,7 +85,7 @@ var connecter = {
   local: {
     getListOfApps: function() {
       return new Promise(function(resolve, reject) {
-        reject("TODO");
+        resolve("TODO");
       });
     },
     getListOfVersions: function(app) {
@@ -99,7 +93,7 @@ var connecter = {
         throw new Error("App name is not specified and is mandatory");
       }
       return new Promise(function(resolve, reject) {
-        reject("TODO");
+        resolve("TODO");
       });
     },
     getAppSpec: function(app, version) {
@@ -107,7 +101,7 @@ var connecter = {
         throw new Error("App name and version are not specified and both are mandatory");
       }
       return new Promise(function(resolve, reject) {
-        reject("TODO");
+        resolve("TODO");
       });
     }
   }
