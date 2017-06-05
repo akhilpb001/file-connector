@@ -19,9 +19,9 @@ var connecter = {
       var url = _hdfsWebAddress + "/" + _hdfsWebNamespace + "?op=LISTSTATUS_BATCH";
       return new Promise(function(resolve, reject) {
         request(url, function(errr, resp, body) {
-          if (errr) {
-            reject(resp);
-            throw resp;
+          if (errr || (resp && resp.statusCode !== 200)) {
+            reject(body);
+            return;
           }
           var apps = [];
           var list = JSON.parse(body);
@@ -46,9 +46,9 @@ var connecter = {
       var url = _hdfsWebAddress + "/" + _hdfsWebNamespace + "/" + app + "?op=LISTSTATUS_BATCH";
       return new Promise(function(resolve, reject) {
         request(url, function(errr, resp, body) {
-          if (errr) {
-            reject(resp);
-            throw resp;
+          if (errr || (resp && resp.statusCode !== 200)) {
+            reject(body);
+            return;
           }
           var vers = [];
           var list = JSON.parse(body);
@@ -73,9 +73,9 @@ var connecter = {
       var url = _hdfsWebAddress + "/" + _hdfsWebNamespace + "/" + app + "/" + version + "/Yarnfile?op=OPEN";
       return new Promise(function(resolve, reject) {
         request(url, function(errr, resp, body) {
-          if (errr) {
-            reject(resp);
-            throw resp;
+          if (errr || (resp && resp.statusCode !== 200)) {
+            reject(body);
+            return;
           }
           resolve(body);
         });
