@@ -1,3 +1,5 @@
+"use strict";
+
 var fs = require('fs');
 var request = require('request');
 var Promise = require('promise');
@@ -85,7 +87,25 @@ var connecter = {
   local: {
     getListOfApps: function() {
       return new Promise(function(resolve, reject) {
-        resolve("TODO");
+        fs.readdir(_localFileSystemBaseDir, function(errr, data) {
+          if (errr) {
+            reject(errr);
+            return;
+          }
+          var dirs = [];
+          if (data) {
+             [].forEach.call(data, function(name) {
+               if (name !== '.git' && name !== 'apps-base'
+                && !"".endsWith.call(name, ".md") && !"".endsWith.call(name, ".sh")) {
+                 dirs.push({
+                   "pathSuffix": name,
+                   "type": "DIRECTORY"
+                 });
+               }
+             });
+          }
+          resolve(dirs);
+        });
       });
     },
     getListOfVersions: function(app) {
@@ -93,7 +113,22 @@ var connecter = {
         throw new Error("App name is not specified and is mandatory");
       }
       return new Promise(function(resolve, reject) {
-        resolve("TODO");
+        fs.readdir(_localFileSystemBaseDir + "/" + app, function(errr, data) {
+          if (errr) {
+            reject(errr);
+            return;
+          }
+          var dirs = [];
+          if (data) {
+            [].forEach.call(data, function(name) {
+              dirs.push({
+                "pathSuffix": name,
+                "type": "DIRECTORY"
+              });
+            });
+          }
+          resolve(dirs);
+        });
       });
     },
     getAppSpec: function(app, version) {
@@ -101,7 +136,13 @@ var connecter = {
         throw new Error("App name and version are not specified and both are mandatory");
       }
       return new Promise(function(resolve, reject) {
-        resolve("TODO");
+        fs.readFile(_localFileSystemBaseDir + "/" + app + "/" + version + "/Yarnfile", 'utf8', function(errr, file) {
+          if (errr) {
+            reject(errr);
+            return;
+          }
+          resolve(file);
+        });
       });
     }
   }
