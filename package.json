@@ -1,6 +1,6 @@
 {
   "name": "file-connector",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Bunch of apis to get list of directories and files from hadoop hdfs or local file system.",
   "main": "index.js",
   "engines": {
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/akhilpb001/file-connector#readme",
   "dependencies": {
+    "graceful-fs": "4.1.11",
     "promise": "7.1.1",
     "request": "2.81.0"
   }
