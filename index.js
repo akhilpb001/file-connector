@@ -1,6 +1,6 @@
 "use strict";
 
-var fs = require('graceful-fs');
+var fs = require('fs');
 var request = require('request');
 var Promise = require('promise');
 
@@ -73,6 +73,21 @@ var connecter = {
         throw new Error("App name and version are not specified and both are mandatory");
       }
       var url = _hdfsWebAddress + "/" + _hdfsWebNamespace + "/" + app + "/" + version + "/Yarnfile?op=OPEN";
+      return new Promise(function(resolve, reject) {
+        request(url, function(errr, resp, body) {
+          if (errr || (resp && resp.statusCode !== 200)) {
+            reject(body);
+            return;
+          }
+          resolve(body);
+        });
+      });
+    },
+    getFile(filepath) {
+      if (!filepath) {
+        throw new Error("filepath is not specified and is mandatory");
+      }
+      var url = _hdfsWebAddress + "/" + _hdfsWebNamespace + "/" + filepath + "?op=OPEN";
       return new Promise(function(resolve, reject) {
         request(url, function(errr, resp, body) {
           if (errr || (resp && resp.statusCode !== 200)) {
