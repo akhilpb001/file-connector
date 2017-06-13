@@ -82,7 +82,7 @@ var connecter = {
         });
       });
     },
-    getFile(filepath) {
+    getFile: function(filepath) {
       if (!filepath) {
         throw new Error("filepath is not specified and is mandatory");
       }
