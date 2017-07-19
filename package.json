@@ -1,7 +1,7 @@
 {
   "name": "file-connector",
-  "version": "0.1.7",
-  "description": "Bunch of apis to get list of directories and files from hadoop hdfs or local file system.",
+  "version": "0.1.8",
+  "description": "Bunch of apis to get list of directories and files from hadoop hdfs.",
   "main": "index.js",
   "engines": {
     "node": ">=4.2.0"
@@ -22,5 +22,8 @@
   "dependencies": {
     "promise": "7.1.1",
     "request": "2.81.0"
+  },
+  "devDependencies": {
+    "file-api": "0.10.4"
   }
 }

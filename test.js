@@ -1,7 +1,10 @@
 var fileConnecter = require('./index');
-var hdfs = fileConnecter.hdfs;
 
-/*Testing succecss scenarios for hdfs*/
+var hdfs = fileConnecter.hdfs;
+fileConnecter.setConfigs({
+  hdfsWebNamespace: 'webhdfs/v1/hwx-assemblies'
+});
+/* Testing succecss scenarios for hdfs */
 // hdfs.getListOfApps().then(function(apps) {
 //   console.log("[List of apps from HDFS]------------------------------------------------------------");
 //   console.log(apps);
@@ -26,22 +29,29 @@ var hdfs = fileConnecter.hdfs;
 //   console.log("------------------------------------------------------------------------------------");
 // });
 
-/*Testing error scenario for hdfs*/
+/* Testing error scenario for hdfs */
 // hdfs.getAppSpec("hbase", "1.1.2.2").catch(function(errr) {
 //   console.log("Catching error.........")
 //   console.log(errr);
 // });
 
-/*Testing getListOfDirectories with empty input*/
+/* Testing getListOfDirectories with empty input */
 // hdfs.getListOfDirectories().then(function(dirs) {
 //   console.log("[List of directories HDFS]------------------------------------------------------------");
 //   console.log(dirs);
 //   console.log("------------------------------------------------------------------------------------");
 // });
 
-/*Testing getListOfDirectories with non-empty input*/
+/* Testing getListOfDirectories with non-empty input */
 // hdfs.getListOfDirectories("kafka").then(function(dirs) {
 //   console.log("[List of directories HDFS]------------------------------------------------------------");
 //   console.log(dirs);
 //   console.log("------------------------------------------------------------------------------------");
+// });
+
+/* Testing createDirectories API */
+// hdfs.createDirectories('admin/kafka', 'apb').then(function(data) {
+//   console.log("Success:", data);
+// }, function (err) {
+//   console.log("Error:", err);
 // });
