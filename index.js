@@ -17,6 +17,7 @@ var connecter = {
 
   hdfs: {
 
+    // Deprecated, use getListOfDirectories API
     getListOfApps: function() {
       var url = _hdfsWebAddress + "/" + _hdfsWebNamespace + "?op=LISTSTATUS";
       return new Promise(function(resolve, reject) {
@@ -40,6 +41,7 @@ var connecter = {
       });
     },
 
+    // Deprecated, use getListOfDirectories API
     getListOfVersions: function(app) {
       if (!app) {
         throw new Error("app is not specified and is mandatory");
@@ -66,6 +68,7 @@ var connecter = {
       });
     },
 
+    // Deprecated, use getFile API
     getAppSpec: function(app, version) {
       if (!app || !version) {
         throw new Error("app and version is not specified and both are mandatory");
